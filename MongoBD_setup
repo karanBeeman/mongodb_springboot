@@ -1,0 +1,33 @@
+
+For local setup (runs on local machine)
+ brew tap mongodb/brew
+ brew install mongodb-community
+ brew services start mongodb-community
+
+# To stop MongoDB service
+    brew services stop mongodb-community
+# To check MongoDB service status
+    brew services list
+# To connect to MongoDB shell
+    mongosh
+# To create a database and collection in MongoDB shell
+    use myDatabase
+    db.createCollection("myCollection")
+# To insert a document into the collection
+    db.myCollection.insertOne({ name: "John", age: 30, city: "New York" })
+# To find documents in the collection
+    db.myCollection.find()
+# To exit MongoDB shell
+    exit
+
+## show dbs - show databases
+  It will have
+  | Database | Role               | Think As        |
+  | -------- | ------------------ | --------------- |
+  | `admin`  | Security & control | Control panel   |
+  | `config` | Cluster setup      | Settings folder |
+  | `local`  | Server info        | Local cache     |
+
+db.getCollectionNames() - show collections in current database
+    db.myCollection.find() - show documents in collection
+db.getCollectionInfos() - show collection details

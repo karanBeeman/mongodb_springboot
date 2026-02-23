@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: mongo_project
+  mongodb:
+    host: localhost
+    database: studentdb
+    port: 27017
