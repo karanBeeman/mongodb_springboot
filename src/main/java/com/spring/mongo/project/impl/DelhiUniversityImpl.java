@@ -1,17 +1,24 @@
 package com.spring.mongo.project.impl;
 
 import com.spring.mongo.project.entity.StudentEntity;
+import com.spring.mongo.project.enums.CollegeType;
+import com.spring.mongo.project.exceptionhandling.EmailAlreadyExistsException;
 import com.spring.mongo.project.model.Student;
 import com.spring.mongo.project.repository.StudentRepository;
 import com.spring.mongo.project.service.UniversityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service("DELHI")
+@Service
 @RequiredArgsConstructor
 public class DelhiUniversityImpl implements UniversityService {
 
     private final StudentRepository repo;
+
+    @Override
+    public CollegeType getCollegeType() {
+        return CollegeType.DELHI;
+    }
 
     @Override
     public void validate(Student dto) {
@@ -29,7 +36,11 @@ public class DelhiUniversityImpl implements UniversityService {
     @Override
     public void save(Student dto) {
         StudentEntity entity = new StudentEntity(null, dto.getName(), dto.getAge(),dto.getEmail(), dto.getCourse());
-        repo.save(entity);
+        try {
+            repo.save(entity);
+        } catch (Exception ex) {
+            throw new EmailAlreadyExistsException("Email already exists: " + dto.getEmail());
+        }
     }
 
 }

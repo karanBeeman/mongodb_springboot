@@ -1,5 +1,6 @@
 package com.spring.mongo.project.controller;
 
+import com.spring.mongo.project.enums.CollegeType;
 import com.spring.mongo.project.factory.UniversityFactory;
 import com.spring.mongo.project.impl.AnnaUniversityImpl;
 import com.spring.mongo.project.model.Student;
@@ -20,7 +21,7 @@ public class UniversityController {
     }
 
     @PostMapping("/university/studentdetail")
-    public void saveStudentDetail(@RequestParam String college, @RequestBody Student student) {
+    public void saveStudentDetail(@RequestParam CollegeType college, @RequestBody Student student) {
         UniversityService service = universityFactory.get(college);
         service.validate(student);
         service.save(student);

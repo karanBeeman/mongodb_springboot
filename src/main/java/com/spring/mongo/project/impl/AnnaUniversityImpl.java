@@ -1,6 +1,7 @@
 package com.spring.mongo.project.impl;
 
 import com.spring.mongo.project.entity.StudentEntity;
+import com.spring.mongo.project.enums.CollegeType;
 import com.spring.mongo.project.exceptionhandling.EmailAlreadyExistsException;
 import com.spring.mongo.project.model.Student;
 import com.spring.mongo.project.repository.StudentRepository;
@@ -8,11 +9,16 @@ import com.spring.mongo.project.service.UniversityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service("ANNA")
+@Service
 @RequiredArgsConstructor
 public class AnnaUniversityImpl implements UniversityService {
 
     private final StudentRepository repo;
+
+    @Override
+    public CollegeType getCollegeType() {
+        return CollegeType.ANNA;
+    }
 
     @Override
     public void validate(Student dto) {
