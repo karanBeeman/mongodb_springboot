@@ -28,7 +28,7 @@ public class DelhiUniversityImpl implements UniversityService {
 
     @Override
     public void save(Student dto) {
-        StudentEntity entity = new StudentEntity(null, dto.getName(), dto.getAge(), dto.getCourse());
+        StudentEntity entity = new StudentEntity(null, dto.getName(), dto.getAge(),dto.getEmail(), dto.getCourse());
         repo.save(entity);
     }
 

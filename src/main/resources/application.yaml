@@ -5,3 +5,6 @@ spring:
     host: localhost
     database: studentdb
     port: 27017
+  data:
+    mongodb:
+      auto-index-creation: true

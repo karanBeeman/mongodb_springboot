@@ -1,6 +1,7 @@
 package com.spring.mongo.project.impl;
 
 import com.spring.mongo.project.entity.StudentEntity;
+import com.spring.mongo.project.exceptionhandling.EmailAlreadyExistsException;
 import com.spring.mongo.project.model.Student;
 import com.spring.mongo.project.repository.StudentRepository;
 import com.spring.mongo.project.service.UniversityService;
@@ -15,7 +16,7 @@ public class AnnaUniversityImpl implements UniversityService {
 
     @Override
     public void validate(Student dto) {
-        if (dto.getAge() < 18) {
+        if (dto.getAge() < 19) {
             throw new IllegalArgumentException("Student must be at least 18 years old");
         }
         if (dto.getName() == null || dto.getName().isEmpty()) {
@@ -28,7 +29,12 @@ public class AnnaUniversityImpl implements UniversityService {
 
     @Override
     public void save(Student dto) {
-        StudentEntity entity = new StudentEntity(null, dto.getName(), dto.getAge(), dto.getCourse());
-        repo.save(entity);
+        StudentEntity entity = new StudentEntity(null, dto.getName(), dto.getAge(), dto.getEmail(), dto.getCourse());
+       try {
+           repo.save(entity);
+       } catch (Exception ex) {
+           throw new EmailAlreadyExistsException("Email already exists: " + dto.getEmail());
+       }
+
     }
 }
